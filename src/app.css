@@ -1,0 +1,40 @@
+@import 'open-props/style';
+
+*,
+*::before,
+*::after {
+	transition: 200ms var(--ease-1);
+	font-family: 'Jetbrains Mono', monospace;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+body {
+	color: var(--gray-0);
+	width: 100dvw;
+	height: 100dvh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--gray-11);
+}
+
+.button {
+	font: inherit;
+	font-weight: 600;
+	line-height: 1.5;
+	color: var(--gray-11);
+	padding-block: var(--pad-y, --size-1, 4px);
+	padding-inline: var(--pad-x, --size-5, 24px);
+	border-radius: 9999rem;
+	border: none;
+
+	&:is(:hover, :focus) {
+		transition: transform 100ms var(--ease-out-1);
+		transform: scale(110%);
+	}
+	&:active {
+		transition: transform 50ms var(--ease-out-1);
+		transform: scale(95%);
+	}
+}
