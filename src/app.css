@@ -1,40 +1,161 @@
-@import 'open-props/style';
+@import url('./styles/reset.css');
+
+:root {
+	/* COLORS */
+	--clr-white: hsl(0, 0%, 100%);
+	--clr-black: hsl(0, 0%, 0%);
+	/* Neutral Palette */
+	--clr-neutral-50: color-mix(in oklab, var(--clr-white), var(--clr-black) 5%);
+	--clr-neutral-100: color-mix(in oklab, var(--clr-white), var(--clr-black) 10%);
+	--clr-neutral-200: color-mix(in oklab, var(--clr-white), var(--clr-black) 20%);
+	--clr-neutral-300: color-mix(in oklab, var(--clr-white), var(--clr-black) 30%);
+	--clr-neutral-400: color-mix(in oklab, var(--clr-white), var(--clr-black) 40%);
+	--clr-neutral-500: color-mix(in oklab, var(--clr-white), var(--clr-black) 50%);
+	--clr-neutral-600: color-mix(in oklab, var(--clr-white), var(--clr-black) 60%);
+	--clr-neutral-700: color-mix(in oklab, var(--clr-white), var(--clr-black) 70%);
+	--clr-neutral-800: color-mix(in oklab, var(--clr-white), var(--clr-black) 80%);
+	--clr-neutral-900: color-mix(in oklab, var(--clr-white), var(--clr-black) 90%);
+	--clr-neutral-950: color-mix(in oklab, var(--clr-white), var(--clr-black) 95%);
+	/* FONTS */
+	/* Families */
+	--font-sys-mono: 'Courier New',
+		Courier,
+		monospace;
+	--font-jetbrains: 'Jetbrains Mono Variable', var(--font-sys-mono);
+	/* Sizes */
+	--fs-sm: clamp(0.8rem, 0.08vi + 0.78rem, 0.84rem);
+	--fs-base: clamp(1rem, 0.24vi + 0.95rem, 1.13rem);
+	--fs-md: clamp(1.25rem, 0.48vi + 1.14rem, 1.5rem);
+	--fs-lg: clamp(1.56rem, 0.83vi + 1.38rem, 2rem);
+	--fs-xl: clamp(1.95rem, 1.36vi + 1.65rem, 2.66rem);
+	--fs-xxl: clamp(2.44rem, 2.12vi + 1.97rem, 3.55rem);
+	--fs-xxxl: clamp(3.05rem, 3.21vi + 2.33rem, 4.73rem);
+}
 
 *,
 *::before,
 *::after {
-	transition: 200ms var(--ease-1);
-	font-family: 'Jetbrains Mono', monospace;
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
-}
-body {
-	color: var(--gray-0);
-	width: 100dvw;
-	height: 100dvh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: var(--gray-11);
+	transition: all 200ms ease-out;
+
+	&::selection {
+		color: var(--clr-black);
+		background: var(--clr-white);
+	}
 }
 
-.button {
+body {
+	color-scheme: dark;
+	font-family: var(--font-jetbrains);
+	color: var(--clr-neutral-200);
+	min-height: 100svh;
+	background: var(--clr-neutral-900);
+}
+
+h1,
+.h1 {
+	font-size: var(--fs-xxxl);
+	font-weight: 800;
+	line-height: 1;
+}
+
+h2,
+.h2 {
+	font-size: var(--fs-xxl);
+	font-weight: 800;
+	line-height: 1;
+}
+
+h3,
+.h3 {
+	font-size: var(--fs-xl);
+	font-weight: 700;
+	line-height: 1.25;
+}
+
+h4,
+.h4 {
+	font-size: var(--fs-lg);
+	font-weight: 700;
+	line-height: 1.25;
+}
+
+h5,
+.h5 {
+	font-size: var(--fs-md);
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+h6,
+.h6 {
+	font-size: var(--fs-base);
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+p,
+.p {
+	font-size: var(--fs-base);
+	line-height: 1.5;
+}
+
+small,
+.small {
+	font-size: var(--fs-sm);
+	font-weight: 500;
+	line-height: 1.5;
+}
+
+span {
+	font: inherit;
+}
+
+.btn {
 	font: inherit;
 	font-weight: 600;
 	line-height: 1.5;
-	color: var(--gray-11);
-	padding-block: var(--pad-y, --size-1, 4px);
-	padding-inline: var(--pad-x, --size-5, 24px);
+	color: inherit;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: .25rem
+		/* 4px */
+	;
+	padding-block: var(--pad-y, 4px);
+	padding-inline: var(--pad-x, 24px);
 	border-radius: 9999rem;
-	border: none;
+	border: 2px solid transparent;
+	background: var(--clr-neutral-800);
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+	cursor: pointer;
 
-	&:is(:hover, :focus) {
-		transition: transform 100ms var(--ease-out-1);
-		transform: scale(110%);
+	&:hover {
+		background: var(--clr-neutral-700);
+		transition: transform 100ms ease-out;
+		transform: scale(105%);
 	}
+
+	&:focus {
+		background: var(--clr-neutral-700);
+	}
+
 	&:active {
-		transition: transform 50ms var(--ease-out-1);
+		transition: transform 50ms ease-out;
 		transform: scale(95%);
 	}
+
+	&:focus-visible {
+		outline-color: var(--clr-white);
+	}
+}
+
+.sr-only {
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	clip-path: rect(0, 0, 0, 0);
+	opacity: 0;
+	visibility: invisible;
+	position: absolute;
 }
