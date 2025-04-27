@@ -70,6 +70,7 @@
 			}, 100);
 		}
 	}
+
 	function copyPassword() {
 		if (browser) {
 			navigator.clipboard.writeText(generatedPassword);
@@ -87,13 +88,11 @@
 			includesSymbols: false
 		};
 
-		if (localStorage) {
-			if (browser) {
-				let savedConfigs = localStorage.getItem(`randomConfigs`);
+		if (browser) {
+			let savedConfigs = localStorage.getItem(`randomConfigs`);
 
-				if (savedConfigs) {
-					return JSON.parse(savedConfigs);
-				}
+			if (savedConfigs) {
+				return JSON.parse(savedConfigs);
 			}
 
 			localStorage.setItem('randomConfigs', JSON.stringify(defaultConfigs));
