@@ -81,21 +81,24 @@
 	}
 
 	function getSavedConfigs(): RandomConfigs {
-		if (browser) {
-			let savedConfigs = localStorage.getItem(`randomConfigs`);
-
-			if (savedConfigs) {
-				return JSON.parse(savedConfigs);
-			}
-		}
-
 		let defaultConfigs: RandomConfigs = {
 			passwordLength: 8,
 			includesNumbers: false,
 			includesSymbols: false
 		};
 
-		localStorage.setItem('randomConfigs', JSON.stringify(defaultConfigs));
+		if (localStorage) {
+			if (browser) {
+				let savedConfigs = localStorage.getItem(`randomConfigs`);
+
+				if (savedConfigs) {
+					return JSON.parse(savedConfigs);
+				}
+			}
+
+			localStorage.setItem('randomConfigs', JSON.stringify(defaultConfigs));
+		}
+
 		return defaultConfigs;
 	}
 	// $inspect(generatedPassword);
