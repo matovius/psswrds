@@ -3,9 +3,6 @@
 	import type { RandomConfigs } from '$lib/scripts/types';
 	import { RandConfigs } from '$lib/stores/configs.svelte';
 	import { PlusIcon, XIcon } from 'lucide-svelte';
-	import { onDestroy, onMount } from 'svelte';
-	import { quadInOut, quadOut } from 'svelte/easing';
-	import { fade, fly } from 'svelte/transition';
 
 	let passwordDisplay: HTMLSpanElement | null = $state(null);
 	let inclusions: string[] = [];
@@ -81,25 +78,6 @@
 				isPasswordCopied = false;
 			}, 500);
 		}
-	}
-
-	function saveConfigs() {
-		let newConfigs: RandomConfigs = {
-			passwordLength: passwordLength,
-			includesNumbers: includeNumbers,
-			includesSymbols: includeSymbols
-		};
-
-		SavedConfigs.set(newConfigs);
-		isConfigMenuOpen = false;
-	}
-
-	function cancelConfigs() {
-		passwordLength = $SavedConfigs.passwordLength;
-		includeNumbers = $SavedConfigs.includesNumbers;
-		includeSymbols = $SavedConfigs.includesSymbols;
-
-		isConfigMenuOpen = false;
 	}
 
 	function getSavedConfigs(): RandomConfigs {
